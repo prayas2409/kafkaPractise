@@ -2,7 +2,6 @@ import java.util.Properties
 
 import org.apache.kafka.clients.producer.{KafkaProducer, ProducerRecord}
 
-
 object SimpleProducer extends App{
 
   lazy val producer: KafkaProducer[String, String] = new KafkaProducer(getKafkaConfigProperties)
@@ -15,9 +14,9 @@ object SimpleProducer extends App{
   def getKafkaConfigProperties: Properties = {
     val config = new Properties()
 
-    config.put("bootstrap.servers", "localhost:9092")
+    config.put("bootstrap.servers", "localhost:9093")
     config.put("group.id", "group1")
-    config.put("client.id", "client1")
+//    config.put("client.id", "client1")
     config.put("enable.auto.commit", "true")
     config.put("session.timeout.ms", "10000")
     config.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer")
