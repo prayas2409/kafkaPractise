@@ -8,14 +8,14 @@ object SimpleProducer extends App{
   lazy val testEmpObjects:List[Employee] = (0 to 1000).map(x=>Employee("John"+x, x)).toList
 
   testEmpObjects.foreach { emp =>
-    producer.send(new ProducerRecord[String, String]("testTopic", emp.id.toString, Employee.asJson(emp)))
+    producer.send(new ProducerRecord[String, String]("TopicTest2", emp.id.toString, Employee.asJson(emp)))
     Thread.sleep(1000)
   }
 
   def getKafkaConfigProperties: Properties = {
     val config = new Properties()
 
-    config.put("bootstrap.servers", "localhost:9092")
+    config.put("bootstrap.servers", "localhost:9095")
 //    config.put("group.id", "group1")
 //    config.put("client.id", "client1")
     config.put("enable.auto.commit", "true")

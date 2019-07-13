@@ -4,7 +4,7 @@
 		module="kafkaexecute_2.11"
 		revision="0.1"
 		status="integration"
-		publication="20190710202824"
+		publication="20190713152204"
 	>
 		<description>
 		kafkaexecute
@@ -32,13 +32,13 @@
 	<dependencies>
 		<dependency org="org.scala-lang" name="scala-compiler" rev="2.11.12" conf="scala-tool->default,optional(default)"/>
 		<dependency org="org.scala-lang" name="scala-library" rev="2.11.12" conf="scala-tool->default,optional(default);compile->default(compile)"/>
+		<dependency org="org.apache.kafka" name="kafka_2.11" rev="2.2.1" conf="compile->default(compile)"/>
 		<dependency org="org.apache.kafka" name="kafka-clients" rev="2.2.1" conf="compile->default(compile)"/>
-		<dependency org="org.apache.kafka" name="kafka-streams" rev="2.2.1" conf="compile->default(compile)"/>
-		<dependency org="org.apache.kafka" name="connect-api" rev="2.1.1" conf="compile->default(compile)"/>
-		<dependency org="org.apache.kafka" name="connect-file" rev="2.2.1" conf="compile->default(compile)"/>
-		<dependency org="org.apache.kafka" name="kafka-streams-scala_2.11" rev="2.2.1" conf="compile->default(compile)"/>
-		<dependency org="org.apache.spark" name="spark-streaming-kafka_2.11" rev="1.0.0" conf="compile->default(compile)"/>
+		<dependency org="org.apache.spark" name="spark-streaming_2.11" rev="2.4.3" conf="compile->default(compile)"/>
 		<dependency org="org.apache.spark" name="spark-sql_2.11" rev="2.4.3" conf="compile->default(compile)"/>
+		<dependency org="org.apache.spark" name="spark-core_2.11" rev="2.4.3" conf="compile->default(compile)"/>
 		<dependency org="com.typesafe.play" name="play-json_2.11" rev="2.4.2" conf="compile->default(compile)"/>
+		<dependency org="com.github.pathikrit" name="better-files_2.12_2.11" rev="3.8.0" conf="compile->default(compile)"/>
+		<dependency org="org.apache.spark" name="spark-streaming-kafka_2.11" rev="1.6.3" conf="compile->default(compile)"/>
 	</dependencies>
 </ivy-module>
