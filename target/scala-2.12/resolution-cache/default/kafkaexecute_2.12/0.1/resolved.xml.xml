@@ -4,7 +4,7 @@
 		module="kafkaexecute_2.12"
 		revision="0.1"
 		status="integration"
-		publication="20190713203303"
+		publication="20190714160457"
 	>
 		<description>
 		kafkaexecute
@@ -37,6 +37,10 @@
 		<dependency org="org.apache.spark" name="spark-core_2.12" rev="2.4.3" conf="compile->default(compile)"/>
 		<dependency org="org.apache.spark" name="spark-streaming-kafka-0-10_2.12" rev="2.4.3" conf="compile->default(compile)"/>
 		<dependency org="org.apache.kafka" name="kafka-clients" rev="0.11.0.1" conf="compile->default(compile)"/>
-		<dependency org="org.apache.spark" name="spark-sql-kafka-0-10_2.12" rev="2.4.3" conf="provided->default(compile)"/>
+		<dependency org="org.apache.spark" name="spark-sql-kafka-0-10_2.12" rev="2.4.3" conf="compile->default(compile)"/>
+		<dependency org="com.typesafe.play" name="play_2.12" rev="2.7.3" conf="compile->default(compile)"/>
+		<override org="com.fasterxml.jackson.core" module="jackson-core" matcher="exact" rev="2.8.7"/>
+		<override org="com.fasterxml.jackson.core" module="jackson-databind" matcher="exact" rev="2.8.7"/>
+		<override org="com.fasterxml.jackson.module" module="jackson-module-scala_2.12" matcher="exact" rev="2.8.7"/>
 	</dependencies>
 </ivy-module>

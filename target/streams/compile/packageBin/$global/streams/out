@@ -1,0 +1,17 @@
+[0m[[0m[0minfo[0m] [0m[0mPackaging /home/admin1/IdeaProjects/kafkaexecute/target/scala-2.12/kafkaexecute_2.12-0.1.jar ...[0m
+[0m[[0m[0mdebug[0m] [0m[0mInput file mappings:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	SimpleProducer$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /home/admin1/IdeaProjects/kafkaexecute/target/scala-2.12/classes/SimpleProducer$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	SimpleProducer$delayedInit$body.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /home/admin1/IdeaProjects/kafkaexecute/target/scala-2.12/classes/SimpleProducer$delayedInit$body.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Employee$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /home/admin1/IdeaProjects/kafkaexecute/target/scala-2.12/classes/Employee$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Employee.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /home/admin1/IdeaProjects/kafkaexecute/target/scala-2.12/classes/Employee.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	SimpleProducer.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /home/admin1/IdeaProjects/kafkaexecute/target/scala-2.12/classes/SimpleProducer.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Consumer$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /home/admin1/IdeaProjects/kafkaexecute/target/scala-2.12/classes/Consumer$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Consumer.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /home/admin1/IdeaProjects/kafkaexecute/target/scala-2.12/classes/Consumer.class[0m
+[0m[[0m[0minfo[0m] [0m[0mDone packaging.[0m
