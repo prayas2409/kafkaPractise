@@ -3,6 +3,8 @@ import org.apache.spark.streaming.kafka010.ConsumerStrategies.Subscribe
 import org.apache.spark.streaming.kafka010.LocationStrategies.PreferConsistent
 import org.apache.spark.streaming.kafka010._
 import org.apache.spark.streaming.{Seconds, StreamingContext}
+import play.api.libs.json.Json
+
 //import play.api.http.MediaRange.parse
 
 object Consumer {
@@ -33,15 +35,33 @@ object Consumer {
       "group.id"-> "group1", // clients can take
       "client.id"-> "consumer-1"
     )
-    val topic = List("TopicTest13").toSet
+    val topic = List("TopicTest14").toSet
 
     val lines = KafkaUtils.createDirectStream[String,String](ssc,PreferConsistent,Subscribe[String, String](topic, kafka_parms))
 //    lines.foreachRDD(x => println(x.collect().toString))
+    var xi = Json.parse("""{"a":"b" }""")
+   val json_data = lines.map(record=>(record.value().toString)).print
+//
 
-   lines.map(record=>(
-     record.value().toString
-     )
-   ).print
+//    var values = ""
+//    fields.foreach( x =>
+//      values += j(x)+" "
+//    )
+//    val s =spark.sparkContext.makeRDD(values).pipe("/home/admin1/IdeaProjects/kafkaexecute/src/main/scala/vectorizer_model.py")
+//    s.collect().foreach(println)
+    //    foreachRDD(x => x.pipe("/home/admin1/IdeaProjects/kafkaexecute/src/main/scala/vectorizer_model.py"))
+//    json_data.foreachRDD(x=>println(x.collect()))
+//   var values =""
+//    fields.foreach(x =>
+//      values = values + json_data(x)+" "
+//    )
+//    for(i <- fields){
+//      values = values + json_data(i)+" "
+//    }
+////    spark.sparkContext.makeRDD(values).pipe("")
+//    println(values)
+
+
 
     ssc.start()
     ssc.awaitTermination()
