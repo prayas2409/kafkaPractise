@@ -1,4 +1,4 @@
-import org.apache.spark.sql.SparkSession
+import org.apache.spark.sql.{DataFrame, SparkSession}
 import org.apache.spark.streaming.kafka010.ConsumerStrategies.Subscribe
 import org.apache.spark.streaming.kafka010.LocationStrategies.PreferConsistent
 import org.apache.spark.streaming.kafka010._
@@ -9,8 +9,9 @@ import play.api.libs.json.Json
 
 object Consumer {
 
-  def printer(s:String):Unit= {
-    println(s)
+  def printer(df: DataFrame):DataFrame= {
+    df.select("4. close").show()
+    df
   }
 
   def main(args: Array[String]): Unit = {
@@ -35,14 +36,21 @@ object Consumer {
       "group.id"-> "group1", // clients can take
       "client.id"-> "consumer-1"
     )
-    val topic = List("TopicTest14").toSet
+    val topic = List("TopicTest15").toSet
 
     val lines = KafkaUtils.createDirectStream[String,String](ssc,PreferConsistent,Subscribe[String, String](topic, kafka_parms))
 //    lines.foreachRDD(x => println(x.collect().toString))
     var xi = Json.parse("""{"a":"b" }""")
-   val json_data = lines.map(record=>(record.value().toString)).print
+   val json_data = lines.map(record=>(record.value().toString))
+        json_data.foreachRDD(
+          x =>
+           x.pipe("/home/admin1/IdeaProjects/kafkaexecute/src/main/scala/vectorizer_model.py").collect().foreach(println)
+        )
+//    json_data.toString().foreach(x =>
 //
-
+//      //    Json.parse(x.toString.replace("(","").replace(")","")).toString().foreach(println)
+//      println("hiw",x.toString.split(":"))
+//    )
 //    var values = ""
 //    fields.foreach( x =>
 //      values += j(x)+" "
@@ -60,8 +68,6 @@ object Consumer {
 //    }
 ////    spark.sparkContext.makeRDD(values).pipe("")
 //    println(values)
-
-
 
     ssc.start()
     ssc.awaitTermination()
