@@ -20,7 +20,11 @@ object SimpleProducer extends App{
   val label = s"Time Series ($time)"
 
   val response = Source.fromURL(s"https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=$symbol&interval=$time&outputsize=full&apikey=$apikey")
-  val string = response.mkString
+  val string = response.mkString.replaceAll("4. close","close")
+    .replaceAll("1. open","open")
+    .replaceAll("2. high","high")
+    .replaceAll("5. volume","volume")
+    .replaceAll("3. low","low")
 
   implicit val formats = org.json4s.DefaultFormats
   val j = play.api.libs.json.Json.parse(string)
@@ -57,7 +61,7 @@ object SimpleProducer extends App{
 //    Thread.sleep(1000)
 //  }
   for (k <- k1) {
-    producer.send(new ProducerRecord[String, String]("TopicTest13", j(label)(k).toString()))
+    producer.send(new ProducerRecord[String, String]("TopicTest15", j(label)(k).toString()))
     Thread.sleep(2000)
   }
 
