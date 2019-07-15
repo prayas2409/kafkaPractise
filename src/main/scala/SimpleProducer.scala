@@ -42,8 +42,7 @@ object SimpleProducer extends App{
       if (y.contains(x)){
         keys += y+","
       }
-    )
-  )
+    ))
 
   keys = keys.replace("\"","")
   val allkeys = keys.split(",")
