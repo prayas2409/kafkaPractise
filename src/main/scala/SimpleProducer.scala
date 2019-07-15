@@ -2,6 +2,7 @@ import java.io.DataOutputStream
 import java.net.{InetAddress, Socket}
 import java.util.Properties
 //import play.api.http.MediaRange.parse
+//import play.api.http.MediaRange.parse
 import java.io.IOException
 
 import org.json4s.jackson.JsonMethods.parse
@@ -13,12 +14,52 @@ import org.apache.kafka.clients.producer.{KafkaProducer, ProducerRecord}
 
 object SimpleProducer extends App{
 
-  lazy val producer: KafkaProducer[String, String] = new KafkaProducer(getKafkaConfigProperties)
-  lazy val testEmpObjects:List[Employee] = (0 to 1000).map(x=>Employee("John"+x, x)).toList
+  val time = "5min"
+  val symbol = "MSFT"
+  val apikey = "0D8RR9NDGU7URNQT"
+  val label = s"Time Series ($time)"
 
-  testEmpObjects.foreach { emp =>
-    producer.send(new ProducerRecord[String, String]("TopicTest7", emp.id.toString, Employee.asJson(emp)))
-    Thread.sleep(1000)
+  val response = Source.fromURL(s"https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=$symbol&interval=$time&outputsize=full&apikey=$apikey")
+  val string = response.mkString
+
+  implicit val formats = org.json4s.DefaultFormats
+  val j = play.api.libs.json.Json.parse(string)
+  val s = j(label).toString()
+
+  val ar = parse(string).extract[Map[String, Any]]
+  val k1 = (parse(s).extract[Map[String, Any]].keys)
+
+  //    This part is to extract the keys out of the data.
+  val data = j(label)("2019-07-05 16:00:00")
+  var keys = ""
+  val fields = List("close","volume","open","high","low")
+  val newdata = data.toString().replace("{","").replace("}","").toString
+  val l = newdata.split(",")
+  val words = l.flatMap(_.split(":"))
+
+  fields.foreach( x =>
+    words.foreach(y =>
+      if (y.contains(x)){
+        keys += y+","
+      }
+    )
+  )
+
+  keys = keys.replace("\"","")
+  val allkeys = keys.split(",")
+
+  var data1 = j(label)("2019-07-05 16:00:00")
+
+  lazy val producer: KafkaProducer[String, String] = new KafkaProducer(getKafkaConfigProperties)
+//  lazy val testEmpObjects:List[Employee] = (0 to 1000).map(x=>Employee("John"+x, x)).toList
+
+//  testEmpObjects.foreach { emp =>
+//    producer.send(new ProducerRecord[String, String]("TopicTest12", emp.id.toString, Employee.asJson(emp)))
+//    Thread.sleep(1000)
+//  }
+  for (k <- k1) {
+    producer.send(new ProducerRecord[String, String]("TopicTest13", j(label)(k).toString()))
+    Thread.sleep(2000)
   }
 
   def from_url(): Unit={
