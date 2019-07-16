@@ -4,7 +4,7 @@
 		module="kafkaexecute$sources"
 		revision="0.1"
 		status="integration"
-		publication="20190714165152"
+		publication="20190716123123"
 	/>
 	<configurations>
 		<conf name="compile" visibility="public" description=""/>

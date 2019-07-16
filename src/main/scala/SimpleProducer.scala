@@ -61,7 +61,7 @@ object SimpleProducer extends App{
 //    Thread.sleep(1000)
 //  }
   for (k <- k1) {
-    producer.send(new ProducerRecord[String, String]("TopicTest15", j(label)(k).toString()))
+    producer.send(new ProducerRecord[String, String]("TopicTest17", j(label)(k).toString()))
     Thread.sleep(2000)
   }
 
@@ -124,7 +124,6 @@ object SimpleProducer extends App{
     System.err.println(e)
   }
   }
-
   }
 
   def getKafkaConfigProperties: Properties = {

@@ -1,1 +1,1 @@
-  /usr/local/kafka/bin/kafka-console-consumer.sh --bootstrap-server localhost:8080 --topic TopicTest7 --from-beginning
+  /usr/local/kafka/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic TopicTest9 --from-beginning
