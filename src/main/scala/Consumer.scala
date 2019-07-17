@@ -15,7 +15,7 @@ object Consumer {
   }
 
   def main(args: Array[String]): Unit = {
-    val fields = List("4. close","5. volume","1. open","2. high","3. low")
+//    val fields = List("4. close","5. volume","1. open","2. high","3. low")
     val spark = SparkSession.builder().appName("Streaming live data").master("local[*]").getOrCreate()
     val ssc = new StreamingContext(spark.sparkContext, Seconds(2))
 
@@ -33,23 +33,28 @@ object Consumer {
       "bootstrap.servers" -> "localhost:9092", // the brokers
       "key.deserializer"->"org.apache.kafka.common.serialization.StringDeserializer", // serialize ments to convert to byte stream
       "value.deserializer"->"org.apache.kafka.common.serialization.StringDeserializer",
-      "group.id"-> "group3", // clients can take
-      "client.id"-> "consumer2"
+      "group.id"-> "group5", // clients can take
+      "client.id"-> "consumer4"
     )
-    val topic = List("TopicTest24").toSet
+    val topic = List("TopicTest28").toSet
     val lines = KafkaUtils.createDirectStream[String,String](ssc,PreferConsistent,Subscribe[String, String](topic, kafka_parms))
 //    lines.foreachRDD(x => println(x.collect().toString))
     var xi = Json.parse("""{"a":"b" }""")
     val json_data = lines.map(record=>(record.value().toString))
     json_data.foreachRDD(
       x =>
-       spark.sqlContext.read.json(x).foreach(y=>
-         spark.sparkContext.makeRDD((List(y(0)+" "+y(4)+" "+y(3)+" "+y(1)))).pipe("").collect().foreach(println)
+
+
+       spark.sparkContext.makeRDD(List(((spark.sqlContext.read.json(x).rdd.collect())).mkString(" ").split(",")),1)
+         .pipe("/home/admin1/IdeaProjects/kafkaexecute/src/main/scala/vectorizer_model.py").collect().foreach(println)
+
+//         .foreach(y=>
+//         spark.sparkContext.makeRDD((List(y.getLong(0)+" "+y.getLong(1)+" "+y.getLong(2)+" "+y.getLong(3)))).pipe("").collect().foreach(println)
 //          .foreach(
 //            y=>
 //          spark.sparkContext.makeRDD(Row(y(0),y(4),y(3),y(1)).toString()).pipe("/home/admin1/IdeaProjects/kafkaexecute/src/main/scala/vectorizer_model.py").collect().foreach(println)
 //              )
-    ))
+    )
 
 
 //    json_data.toString().foreach(x =>
