@@ -61,7 +61,7 @@ object SimpleProducer extends App{
 //    Thread.sleep(1000)
 //  }
   for (k <- k1) {
-    producer.send(new ProducerRecord[String, String]("TopicTest17", j(label)(k).toString()))
+    producer.send(new ProducerRecord[String, String]("TopicTest24", j(label)(k).toString()))
     Thread.sleep(2000)
   }
 
@@ -122,16 +122,14 @@ object SimpleProducer extends App{
   } catch {
     case e: IOException =>
     System.err.println(e)
-  }
-  }
-  }
+  }  }}
 
   def getKafkaConfigProperties: Properties = {
     val config = new Properties()
 
     config.put("bootstrap.servers", "localhost:9092")
-    config.put("group.id", "group1")
-    config.put("client.id", "consumer-1")
+    config.put("group.id", "group3")
+    config.put("client.id", "consumer2")
     config.put("enable.auto.commit", "true")
     config.put("session.timeout.ms", "10000")
     config.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer")
