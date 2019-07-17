@@ -33,25 +33,25 @@ object SimpleProducer extends App{
   val ar = parse(string).extract[Map[String, Any]]
   val k1 = (parse(s).extract[Map[String, Any]].keys)
 
-  //    This part is to extract the keys out of the data.
-  val data = j(label)("2019-07-05 16:00:00")
-  var keys = ""
-  val fields = List("close","volume","open","high","low")
-  val newdata = data.toString().replace("{","").replace("}","").toString
-  val l = newdata.split(",")
-  val words = l.flatMap(_.split(":"))
-
-  fields.foreach( x =>
-    words.foreach(y =>
-      if (y.contains(x)){
-        keys += y+","
-      }
-    ))
-
-  keys = keys.replace("\"","")
-  val allkeys = keys.split(",")
-
-  var data1 = j(label)("2019-07-05 16:00:00")
+//  //    This part is to extract the keys out of the data.
+//  val data = j(label)("2019-07-05 16:00:00")
+//  var keys = ""
+//  val fields = List("close","volume","open","high","low")
+//  val newdata = data.toString().replace("{","").replace("}","").toString
+//  val l = newdata.split(",")
+//  val words = l.flatMap(_.split(":"))
+//
+//  fields.foreach( x =>
+//    words.foreach(y =>
+//      if (y.contains(x)){
+//        keys += y+","
+//      }
+//    ))
+//
+//  keys = keys.replace("\"","")
+//  val allkeys = keys.split(",")
+//
+//  var data1 = j(label)("2019-07-05 16:00:00")
 
   lazy val producer: KafkaProducer[String, String] = new KafkaProducer(getKafkaConfigProperties)
 //  lazy val testEmpObjects:List[Employee] = (0 to 1000).map(x=>Employee("John"+x, x)).toList
@@ -61,7 +61,7 @@ object SimpleProducer extends App{
 //    Thread.sleep(1000)
 //  }
   for (k <- k1) {
-    producer.send(new ProducerRecord[String, String]("TopicTest24", j(label)(k).toString()))
+    producer.send(new ProducerRecord[String, String]("TopicTest28", j(label)(k).toString()))
     Thread.sleep(2000)
   }
 
@@ -128,8 +128,8 @@ object SimpleProducer extends App{
     val config = new Properties()
 
     config.put("bootstrap.servers", "localhost:9092")
-    config.put("group.id", "group3")
-    config.put("client.id", "consumer2")
+    config.put("group.id", "group5")
+    config.put("client.id", "consumer4")
     config.put("enable.auto.commit", "true")
     config.put("session.timeout.ms", "10000")
     config.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer")
