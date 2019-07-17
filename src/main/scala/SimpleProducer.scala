@@ -61,7 +61,7 @@ object SimpleProducer extends App{
 //    Thread.sleep(1000)
 //  }
   for (k <- k1) {
-    producer.send(new ProducerRecord[String, String]("TopicTest28", j(label)(k).toString()))
+    producer.send(new ProducerRecord[String, String]("TopicTest30", j(label)(k).toString()))
     Thread.sleep(2000)
   }
 
