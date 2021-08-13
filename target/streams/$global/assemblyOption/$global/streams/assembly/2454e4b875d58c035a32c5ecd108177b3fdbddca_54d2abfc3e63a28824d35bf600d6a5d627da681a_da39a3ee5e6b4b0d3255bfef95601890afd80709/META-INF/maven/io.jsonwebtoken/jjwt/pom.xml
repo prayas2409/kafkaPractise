@@ -88,7 +88,7 @@
         <jackson.version>2.9.6</jackson.version>
 
         <!-- Optional Runtime Dependencies: -->
-        <bouncycastle.version>1.56</bouncycastle.version>
+        <bouncycastle.version>1.67</bouncycastle.version>
 
         <!-- Test Dependencies: Only required for testing when building.  Not required by users at runtime: -->
         <groovy.version>2.4.11</groovy.version>
